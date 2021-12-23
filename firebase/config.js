@@ -1,3 +1,6 @@
+import { initializeApp } from 'firebase/app';
+import { getFirestore } from 'firebase/firestore';
+
 const config = {
   apiKey: 'AIzaSyC_JwpXS4uj9sRRDrbFAtalE1QulNTmKnw',
   authDomain: 'visualizer-new-devs-test.firebaseapp.com',
@@ -7,4 +10,8 @@ const config = {
   appId: '1:702664185241:web:580752c50d570d0c89ef08'
 }
 
-export default config
+initializeApp(config);
+
+const db = getFirestore()
+
+export default db;
