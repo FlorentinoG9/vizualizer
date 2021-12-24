@@ -5,8 +5,8 @@ import db from '../firebase/config';
 export const MaterialsContext = createContext();
 
 export default function MaterialsProvider({ children }) {
-	const [points, setPoints] = useState({});
-	const [materials, setMaterials] = useState({});
+	const [points, setPoints] = useState([]);
+	const [materials, setMaterials] = useState([]);
 	const [selected, setSelected] = useState(null);
 
 	const chooseMaterial = (material) => {
@@ -15,21 +15,21 @@ export default function MaterialsProvider({ children }) {
 
 	useEffect(() => {
 		const colRef = collection(db, 'points');
-		const q = query(colRef, orderBy('id', 'asc'));
 
-		onSnapshot(q, (snap) => {
+		onSnapshot(colRef, (snap) => {
 			setPoints(snap.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
 		});
-	}, [points]);
+
+	}, []);
 
 	useEffect(() => {
 		const colRef = collection(db, 'materials');
-		const q = query(colRef, orderBy('id', 'asc'));
 
-		onSnapshot(q, (snap) => {
+		onSnapshot(colRef, (snap) => {
 			setMaterials(snap.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
 		});
-	}, [materials]);
+
+	}, []);
 
 	return (
 		<MaterialsContext.Provider
