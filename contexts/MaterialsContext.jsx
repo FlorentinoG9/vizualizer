@@ -9,9 +9,10 @@ export default function MaterialsProvider({ children }) {
 	const [materials, setMaterials] = useState([]);
 	const [selected, setSelected] = useState([]);
 
+
 	const chooseMaterial = (id) => {
 		const mats = materials.filter(mat => mat.id == id)
-		setSelected(mats);
+		setSelected(mats[0].materials);
 	};
 
 	useEffect(() => {
