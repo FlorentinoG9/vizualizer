@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect } from 'react';
-import { collection, onSnapshot, query, orderBy } from 'firebase/firestore';
+import { collection, onSnapshot } from 'firebase/firestore';
 import db from '../firebase/config';
 
 export const MaterialsContext = createContext();
@@ -7,10 +7,11 @@ export const MaterialsContext = createContext();
 export default function MaterialsProvider({ children }) {
 	const [points, setPoints] = useState([]);
 	const [materials, setMaterials] = useState([]);
-	const [selected, setSelected] = useState(null);
+	const [selected, setSelected] = useState([]);
 
-	const chooseMaterial = (material) => {
-		setSelected(material);
+	const chooseMaterial = (id) => {
+		const mats = materials.filter(mat => mat.id == id)
+		setSelected(mats);
 	};
 
 	useEffect(() => {
